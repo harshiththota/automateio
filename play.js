@@ -4,7 +4,6 @@ const colors = require('colors');
 const Display = require('./display');
 const Helper = require('./helper');
 
-const definitionIndex = 0;
 
 const isCorrectMatch = function (actualWord, expectedResult, synonyms) {
   if (actualWord === expectedResult || _.includes(synonyms, actualWord)) {

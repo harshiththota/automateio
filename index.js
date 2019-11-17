@@ -32,8 +32,10 @@ switch(func) {
 
   default:
     if (func) {
-      return Helper.fullDist(func);
+      return Helper.fullDist(func)
+        .then((result) => Display.displayFullDist(result));
     } else {
-      return Helper.dayFullDist();
+      return Helper.dayFullDist()
+        .then((result) => Display.displayFullDist(result));
     }
 };

@@ -1,4 +1,5 @@
 const Helper = require('./helper');
+const Display = require('./display');
 
 const RELATION_TYPE = {
   SYNONYM: 'synonym',
@@ -10,16 +11,20 @@ const word = process.argv[3];
 
 switch(func) {
   case 'defn':
-    return Helper.definitions(word);
+    return Helper.definitions(word)
+      .then(result => Display.displayDefinitions(result));
   
   case 'syn':
-    return Helper.relatedWords(word, RELATION_TYPE.SYNONYM);
+    return Helper.relatedWords(word, RELATION_TYPE.SYNONYM)
+      .then(result => Display.displayRelatedWords(result, RELATION_TYPE.SYNONYM));
 
   case 'ant':
-    return Helper.relatedWords(word, RELATION_TYPE.ANTONYM);
+    return Helper.relatedWords(word, RELATION_TYPE.ANTONYM)
+      .then(result => Display.displayRelatedWords(result, RELATION_TYPE.ANTONYM));
 
   case 'ex':
-    return Helper.example(word);
+    return Helper.example(word)
+      .then(result => Display.displayExamples(result.examples));
 
   case 'play':
     return Helper.play();

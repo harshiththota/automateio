@@ -1,6 +1,12 @@
 const _ = require('lodash');
 const colors = require('colors');
 
+const RELATION_TYPE = {
+  SYNONYM: 'synonym',
+  ANTONYM: 'antonym',
+};
+
+
 exports.displayDefinitions = function (definitions) {
   if (_.isEmpty(definitions)) {
     console.log(colors.bgYellow('No definitions found'));
@@ -12,6 +18,8 @@ exports.displayDefinitions = function (definitions) {
   _.forEach(definitions, (defn) => {
     console.log(colors.green(defn.text));
   });
+
+  return Promise.resolve();
 };
 
 exports.displayRelatedWords = function (relatedWords, type) {
@@ -25,6 +33,8 @@ exports.displayRelatedWords = function (relatedWords, type) {
   _.forEach(relatedWords, (word) => {
     console.log(colors.green(word));
   });
+
+  return Promise.resolve();
 };
 
 exports.displayExamples = function (examples) {

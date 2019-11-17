@@ -16,7 +16,7 @@ exports.displayDefinitions = function (definitions) {
 
 exports.displayRelatedWords = function (relatedWords, type) {
   if (_.isEmpty(relatedWords)) {
-    console.log(colors.bgYellow('No related words found'));
+    console.log(colors.bgYellow(`No related words found of type ${type}`));
     return;
   }
 

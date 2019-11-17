@@ -43,7 +43,7 @@ const playGame = function (result) {
               return hint(result)
                 .then(() => playGame(result))
             case 'Quit':
-              console.log('Word : ', word);
+              return Display.displayFullDist(result);
           }
         });
     });

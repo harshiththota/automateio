@@ -39,3 +39,23 @@ exports.displayExamples = function (examples) {
     console.log(colors.green(example.text));
   });
 };
+
+exports.displayPlay = function (result) {
+  console.log(colors.bgCyan('Definition'));
+  console.log(colors.blue(result.definitions[0].text));
+
+  result.definitions = _.pull(result.definitions, result.definitions[0]);
+  if (!_.isEmpty(result.synonyms)) {
+    console.log(colors.bgCyan('Synonyms'));
+    console.log(colors.blue(result.synonyms[0]));
+
+    result.synonyms = _.pull(result.synonyms, result.synonyms[0]);
+  } else if (!_.isEmpty(result.antonyms)) {
+    console.log(colors.bgCyan('Antonyms'));
+    console.log(colors.blue(result.antonyms[0]));
+
+    result.antonyms = _.pull(result.antonyms, result.antonyms[0]);
+  }
+
+  return Promise.resolve();
+};

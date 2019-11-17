@@ -1,6 +1,5 @@
 const requestAPI = require('request');
 const _ = require('lodash');
-const inquirer = require('inquirer');
 const colors = require('colors');
 
 const URI = 'https://fourtytwowords.herokuapp.com';
@@ -125,8 +124,8 @@ exports.fullDist = function (word) {
   const result = {};
   result.word = word;
   return exports.definitions(word)
-    .then((definition) => {
-      result.definition = definition;
+    .then((definitions) => {
+      result.definitions = definitions;
 
       return exports.relatedWords(word, RELATION_TYPE.SYNONYM)
         .then((synonyms) => {
@@ -150,18 +149,4 @@ exports.fullDist = function (word) {
 exports.dayFullDist = function () {
   return exports.random()
     .then((word) => exports.fullDist(word));
-};
-
-exports.play = function () {
-  return exports.dayFullDist()
-    .then((result) => {
-      word = result.word;
-      inquirer.prompt([ {type: 'input', name: 'Guess the word' } ])
-        .then((answer) => {
-          if (word === answer) {
-            console.log('Success');
-          }
-          console.log('failed');
-        });
-    });
 };

@@ -1,5 +1,6 @@
 const Helper = require('./helper');
 const Display = require('./display');
+const Play = require('./play');
 
 const RELATION_TYPE = {
   SYNONYM: 'synonym',
@@ -27,7 +28,7 @@ switch(func) {
       .then(result => Display.displayExamples(result.examples));
 
   case 'play':
-    return Helper.play();
+    return Play.play();
 
   default:
     if (func) {

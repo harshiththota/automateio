@@ -18,7 +18,7 @@ const hint = function (result) {
   const word = result.word;
   const jumbledWord = word.split('').sort(function () { return 0.5 - Math.random() }).join('');
 
-  console.log('jumbled word : ', jumbledWord);
+  console.log(colors.blue('jumbled word : ', jumbledWord));
 
   return Display.displayPlay(result);
 };

@@ -53,6 +53,9 @@ exports.displayExamples = function (examples) {
 };
 
 exports.displayFullDist = function (result) {
+  console.log(colors.bgCyan('Word'));
+  console.log(colors.green(result.word));
+
   return exports.displayDefinitions(result.definitions)
     .then(() => exports.displayRelatedWords(result.synonyms, RELATION_TYPE.SYNONYM))
     .then(() => exports.displayRelatedWords(result.antonyms, RELATION_TYPE.ANTONYM))

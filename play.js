@@ -52,8 +52,6 @@ const playGame = function (result) {
 exports.play = function () {
   return Helper.dayFullDist()
     .then((result) => {
-      console.log('result : ', result);
-      console.log('**********************');
       return Display.displayPlay(result)
         .then(() => playGame(result));
     });

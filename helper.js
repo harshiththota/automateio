@@ -1,6 +1,7 @@
 const requestAPI = require('request');
 const _ = require('lodash');
 const inquirer = require('inquirer');
+const colors = require('colors');
 
 const URI = 'https://fourtytwowords.herokuapp.com';
 const API_KEY = 'b972c7ca44dda72a5b482052b1f5e13470e01477f3fb97c85d5313b3c112627073481104fec2fb1a0cc9d84c2212474c0cbe7d8e59d7b95c7cb32a1133f778abd1857bf934ba06647fda4f59e878d164';
@@ -10,10 +11,11 @@ const RELATION_TYPE = {
   ANTONYM: 'antonym',
 };
 
+const NOT_FOUND_ERR_MSG = 'Error : Input word not found';
 
 exports.definitions = function (word) {
   if (!word) {
-    console.log('Error Found : Word is undefined in defination');
+    console.log(colors.bgRed(NOT_FOUND_ERR_MSG));
     return;
   }
   const uri = URI + `/word/${word}/definitions?api_key=${API_KEY}`;
@@ -28,8 +30,8 @@ exports.definitions = function (word) {
 
       if (error || (body && body.error)) {
         const errorMessage = error || (body && body.error);
-        console.log('Error Found : ', errorMessage);
-        return resolve(error);
+        console.log(colors.bgRed('Error : ', errorMessage));
+        return resolve();
       }
 
       resolve(body);
@@ -39,7 +41,8 @@ exports.definitions = function (word) {
 
 exports.relatedWords = function (word, type) {
   if (!word) {
-    console.log(`Error Found : Word is undefined in ${type} function`);
+    console.log(colors.bgRed(NOT_FOUND_ERR_MSG));
+    return;
   }
 
   const uri = URI + `/word/${word}/relatedWords?api_key=${API_KEY}`;
@@ -54,13 +57,8 @@ exports.relatedWords = function (word, type) {
 
       if (error || (body && body.error)) {
         const errorMessage = error || (body && body.error);
-        console.log('Error Found : ', errorMessage);
-        return resolve(error);
-      }
-
-      if (_.isEmpty(body)) {
-          console.log('Empty response result');
-          return resolve();
+        console.log(colors.bgRed('Error : ', errorMessage));
+        return resolve();
       }
 
       let words;
@@ -70,11 +68,6 @@ exports.relatedWords = function (word, type) {
         }
       });
 
-      if (_.isEmpty(words)) {
-        console.log(`Error Found : No ${type} found`);
-        return resolve();
-      }
-
       resolve(words);
     });
   });
@@ -82,9 +75,10 @@ exports.relatedWords = function (word, type) {
 
 exports.example = function (word) {
   if (!word) {
-    console.log('Error Found : Word is undefined in example function');
+    console.log(colors.bgRed(NOT_FOUND_ERR_MSG));
     return;
   }
+
   const uri = URI + `/word/${word}/examples?api_key=${API_KEY}`;
   const options = {
     method: 'GET',
@@ -97,8 +91,8 @@ exports.example = function (word) {
 
       if (error || (body && body.error)) {
         const errorMessage = error || (body && body.error);
-        console.log('Error Found : ', errorMessage);
-        return resolve(error);
+        console.log(colors.bgRed('Error : ', errorMessage));
+        return resolve();
       }
 
       return resolve(body);
@@ -124,7 +118,8 @@ exports.random = function () {
 
 exports.fullDist = function (word) {
   if (!word) {
-    console.log('Error Found : Word is undefined in fullDist function');
+    console.log(colors.bgRed(NOT_FOUND_ERR_MSG));
+    return;
   }
 
   const result = {};

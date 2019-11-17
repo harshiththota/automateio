@@ -21,6 +21,9 @@ switch(func) {
   case 'ex':
     return Helper.example(word);
 
+  case 'play':
+    return Helper.play();
+
   default:
     if (func) {
       return Helper.fullDist(func);

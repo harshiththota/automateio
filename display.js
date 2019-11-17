@@ -1,3 +1,7 @@
+/*
+  This file contains all display functions
+*/
+
 const _ = require('lodash');
 const colors = require('colors');
 
@@ -6,7 +10,10 @@ const RELATION_TYPE = {
   ANTONYM: 'antonym',
 };
 
-
+/**
+ * Function used to display definitions
+ * @param {Object} {definitions} {list of definitions}
+ */
 exports.displayDefinitions = function (definitions) {
   if (_.isEmpty(definitions)) {
     console.log(colors.bgYellow('No definitions found'));
@@ -22,6 +29,11 @@ exports.displayDefinitions = function (definitions) {
   return Promise.resolve();
 };
 
+/**
+ * Function used to display related words like synonym / antonym
+ * @param {Object} {relatedWords} {list of words}
+ * @param {String} {type} {type of relation}
+ */
 exports.displayRelatedWords = function (relatedWords, type) {
   if (_.isEmpty(relatedWords)) {
     console.log(colors.bgYellow(`No related words found of type ${type}`));
@@ -37,6 +49,10 @@ exports.displayRelatedWords = function (relatedWords, type) {
   return Promise.resolve();
 };
 
+/**
+ * Function used to display examples
+ * @param {Object} {relatedWords} {list of examples}
+ */
 exports.displayExamples = function (examples) {
   if (_.isEmpty(examples)) {
     console.log(colors.bgYellow('No examples found'));
@@ -52,6 +68,10 @@ exports.displayExamples = function (examples) {
   return Promise.resolve();
 };
 
+/**
+ * Function used to display full dist
+ * @param {Object} {result} {Entire dist}
+ */
 exports.displayFullDist = function (result) {
   console.log(colors.bgCyan('Word'));
   console.log(colors.green(result.word));
@@ -62,6 +82,10 @@ exports.displayFullDist = function (result) {
     .then(() => exports.displayExamples(result.examples.examples));
 };
 
+/**
+ * Function used to play game
+ * @param {Object} {result} {Entire dist}
+ */
 exports.displayPlay = function (result) {
   console.log(colors.bgCyan('Definition'));
   console.log(colors.blue(result.definitions[0].text));

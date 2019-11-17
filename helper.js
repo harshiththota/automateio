@@ -12,6 +12,11 @@ const RELATION_TYPE = {
 
 const NOT_FOUND_ERR_MSG = 'Error : Input word not found';
 
+/**
+ * Gets the definitions of given word
+ * @param {String} {word}
+ * @returns {Object} {List of definitions}
+ */
 exports.definitions = function (word) {
   if (!word) {
     console.log(colors.bgRed(NOT_FOUND_ERR_MSG));
@@ -38,6 +43,12 @@ exports.definitions = function (word) {
   }); 
 };
 
+/**
+ * Gets the relation words of given word
+ * @param {String} {word}
+ * @param {String} {type} {synonym / antonym}
+ * @returns {Object} {List of related words}
+ */
 exports.relatedWords = function (word, type) {
   if (!word) {
     console.log(colors.bgRed(NOT_FOUND_ERR_MSG));
@@ -72,6 +83,11 @@ exports.relatedWords = function (word, type) {
   });
 };
 
+/**
+ * Gets the examples of given word
+ * @param {String} {word}
+ * @returns {Object} {List of examples}
+ */
 exports.example = function (word) {
   if (!word) {
     console.log(colors.bgRed(NOT_FOUND_ERR_MSG));
@@ -99,6 +115,10 @@ exports.example = function (word) {
   });
 };
 
+/**
+ * Gets the relation words
+ * @returns {String} {random word}
+ */
 exports.random = function () {
   const uri = URI + `/words/randomWord?api_key=${API_KEY}`;
   const options = {
@@ -115,6 +135,11 @@ exports.random = function () {
   });
 };
 
+/**
+ * Gets the full dist of given word
+ * @param {String} {word}
+ * @returns {Object} {full dist}
+ */
 exports.fullDist = function (word) {
   if (!word) {
     console.log(colors.bgRed(NOT_FOUND_ERR_MSG));
@@ -145,6 +170,12 @@ exports.fullDist = function (word) {
         });
     })
 };
+
+/**
+ * Gets the full dist of random word
+ * @param {String} {word}
+ * @returns {Object} {full dist}
+ */
 
 exports.dayFullDist = function () {
   return exports.random()

@@ -4,7 +4,13 @@ const colors = require('colors');
 const Display = require('./display');
 const Helper = require('./helper');
 
-
+/**
+ * Checks whether input answer is correct or not
+ * @param {String} {actualWord}
+ * @param {String} {expectedResult}
+ * @param {Object} {synonyms} {List of synonyms}
+ * @returns {Boolean}
+ */
 const isCorrectMatch = function (actualWord, expectedResult, synonyms) {
   if (actualWord === expectedResult || _.includes(synonyms, actualWord)) {
     return true;
@@ -13,8 +19,13 @@ const isCorrectMatch = function (actualWord, expectedResult, synonyms) {
   return false;
 };
 
+/**
+ * Shows the hints
+ * @param {Object} {result} {Entire dist}
+ */
 const hint = function (result) {
   const word = result.word;
+  // jumbuling the actual word
   const jumbledWord = word.split('').sort(function () { return 0.5 - Math.random() }).join('');
 
   console.log(colors.blue('jumbled word : ', jumbledWord));
@@ -22,6 +33,10 @@ const hint = function (result) {
   return Display.displayPlay(result);
 };
 
+/**
+ * Gets the input and try the choices
+ * @param {Object} {result} {Entire dist}
+ */
 const playGame = function (result) {
   word = result.word;
   return inquirer.prompt([{ type: 'input', name: 'word', message: 'Guess the word' }])

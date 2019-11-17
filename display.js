@@ -38,6 +38,15 @@ exports.displayExamples = function (examples) {
   _.forEach(examples, (example) => {
     console.log(colors.green(example.text));
   });
+
+  return Promise.resolve();
+};
+
+exports.displayFullDist = function (result) {
+  return exports.displayDefinitions(result.definitions)
+    .then(() => exports.displayRelatedWords(result.synonyms, RELATION_TYPE.SYNONYM))
+    .then(() => exports.displayRelatedWords(result.antonyms, RELATION_TYPE.ANTONYM))
+    .then(() => exports.displayExamples(result.examples.examples));
 };
 
 exports.displayPlay = function (result) {

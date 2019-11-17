@@ -30,6 +30,7 @@ const playGame = function (result) {
       console.log('anser : ', answer, '*');
       if (isCorrectMatch(answer.word, word, result.synonyms)) {
         console.log(colors.bgGreen('Success'));
+        return;
       }
 
       return inquirer.prompt([{ type: 'rawlist', name: 'option', choices: ['Try Again', 'Hint', 'Quit'] }])
